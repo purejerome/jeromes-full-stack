@@ -35,6 +35,31 @@ export type ItemUpdate = {
   description?: string | null
 }
 
+export type MeetingCreate = {
+  title: string
+  agenda: string
+  summary?: string | null
+}
+
+export type MeetingPublic = {
+  title: string
+  agenda: string
+  summary?: string | null
+  id: string
+  owner_id: string
+}
+
+export type MeetingsPublic = {
+  data: Array<MeetingPublic>
+  count: number
+}
+
+export type MeetingUpdate = {
+  title?: string | null
+  agenda?: string | null
+  summary?: string | null
+}
+
 export type Message = {
   message: string
 }
@@ -99,6 +124,38 @@ export type ValidationError = {
   msg: string
   type: string
 }
+
+export type MeetingsReadMeetingsData = {
+  limit?: number
+  skip?: number
+}
+
+export type MeetingsReadMeetingsResponse = MeetingsPublic
+
+export type MeetingsCreateMeetingData = {
+  requestBody: MeetingCreate
+}
+
+export type MeetingsCreateMeetingResponse = MeetingPublic
+
+export type MeetingsReadMeetingData = {
+  id: string
+}
+
+export type MeetingsReadMeetingResponse = MeetingPublic
+
+export type MeetingsUpdateMeetingData = {
+  id: string
+  requestBody: MeetingUpdate
+}
+
+export type MeetingsUpdateMeetingResponse = MeetingPublic
+
+export type MeetingsDeleteMeetingData = {
+  id: string
+}
+
+export type MeetingsDeleteMeetingResponse = Message
 
 export type ItemsReadItemsData = {
   limit?: number
