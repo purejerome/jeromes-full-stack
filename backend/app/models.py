@@ -112,3 +112,28 @@ class TokenPayload(SQLModel):
 class NewPassword(SQLModel):
     token: str
     new_password: str = Field(min_length=8, max_length=40)
+
+class MeetingBase(SQLModel):
+    title: str = Field(nullable=False)
+    agenda: str = Field(nullable=False)
+    summary: str = Field(nullable=True)
+    
+class MeetingCreate(MeetingBase):
+    pass
+       
+class Meeting(MeetingBase, table=True):
+    id: int = Field(default=None, primary_key=True)
+    owner_id: uuid.UUID = Field(default_factory=uuid.uuid4)
+    
+class MeetingUpdate(SQLModel):
+    title: str | None =  Field(default=None)
+    agenda: str | None =  Field(default=None)
+    summary: str | None =  Field(default=None)
+    
+class MeetingPublic(MeetingBase):
+    id: int
+    owner_id: uuid.UUID
+    
+class MeetingsPublic(SQLModel):
+    data: list[MeetingPublic]
+    count: int
