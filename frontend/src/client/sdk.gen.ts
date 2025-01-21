@@ -23,6 +23,16 @@ import type {
   LoginResetPasswordResponse,
   LoginRecoverPasswordHtmlContentData,
   LoginRecoverPasswordHtmlContentResponse,
+  MeetingsReadMeetingsData,
+  MeetingsReadMeetingsResponse,
+  MeetingsCreateMeetingData,
+  MeetingsCreateMeetingResponse,
+  MeetingsReadMeetingData,
+  MeetingsReadMeetingResponse,
+  MeetingsUpdateMeetingData,
+  MeetingsUpdateMeetingResponse,
+  MeetingsDeleteMeetingData,
+  MeetingsDeleteMeetingResponse,
   UsersReadUsersData,
   UsersReadUsersResponse,
   UsersCreateUserData,
@@ -45,6 +55,127 @@ import type {
   UtilsTestEmailResponse,
   UtilsHealthCheckResponse,
 } from "./types.gen"
+
+export class MeetingsService {
+  /**
+   * Read Meetings
+   * Retrieve meetings.
+   * @param data The data for the request.
+   * @param data.skip
+   * @param data.limit
+   * @returns MeetingsPublic Successful Response
+   * @throws ApiError
+   */
+  public static readMeetings(
+    data: MeetingsReadMeetingsData = {},
+  ): CancelablePromise<MeetingsReadMeetingsResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/meetings/",
+      query: {
+        skip: data.skip,
+        limit: data.limit,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Create Meeting
+   * Create new meeting.
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns MeetingPublic Successful Response
+   * @throws ApiError
+   */
+  public static createMeeting(
+    data: MeetingsCreateMeetingData,
+  ): CancelablePromise<MeetingsCreateMeetingResponse> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/meetings/",
+      body: data.requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Read Meeting
+   * Get meeting by ID.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns MeetingPublic Successful Response
+   * @throws ApiError
+   */
+  public static readMeeting(
+    data: MeetingsReadMeetingData,
+  ): CancelablePromise<MeetingsReadMeetingResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/meetings/{id}",
+      path: {
+        id: data.id,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Update Meeting
+   * Update an meeting.
+   * @param data The data for the request.
+   * @param data.id
+   * @param data.requestBody
+   * @returns MeetingPublic Successful Response
+   * @throws ApiError
+   */
+  public static updateMeeting(
+    data: MeetingsUpdateMeetingData,
+  ): CancelablePromise<MeetingsUpdateMeetingResponse> {
+    return __request(OpenAPI, {
+      method: "PUT",
+      url: "/api/v1/meetings/{id}",
+      path: {
+        id: data.id,
+      },
+      body: data.requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Delete Meeting
+   * Delete an meeting.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns Message Successful Response
+   * @throws ApiError
+   */
+  public static deleteMeeting(
+    data: MeetingsDeleteMeetingData,
+  ): CancelablePromise<MeetingsDeleteMeetingResponse> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/meetings/{id}",
+      path: {
+        id: data.id,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+}
 
 export class ItemsService {
   /**
