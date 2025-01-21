@@ -22,7 +22,7 @@ def read_items(
 ) -> Any:
     """
     Retrieve items.
-    """ 
+    """
     if current_user.is_superuser:
         count_statement = select(func.count()).select_from(Meeting)
         count = session.exec(count_statement).one()

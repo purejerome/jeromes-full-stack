@@ -61,7 +61,7 @@ def test_read_item_not_enough_permissions(
     assert response.status_code == 400
     content = response.json()
     assert content["detail"] == "Not enough permissions"
-    
+
 # def test_read_item_not_enough_permissions2(
 #     client: TestClient, normal_user_token_headers: dict[str, str], db: Session
 # ) -> None:
